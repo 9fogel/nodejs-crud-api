@@ -1,6 +1,6 @@
-import { IUser } from "../types/types.js";
+import { IUser } from '../types/types.js';
 
-export const usersList: Array<IUser> = [
+export const userList: Array<IUser> = [
   {
     id: '1',
     username: 'Winnie the Pooh',
