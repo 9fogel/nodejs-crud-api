@@ -1,8 +1,7 @@
-// class Controller implements IController {
 import { userList } from '../data/users-data.js';
-import { IUser } from '../types/types.js';
+import { IUser, IController } from '../types/types.js';
 
-class Controller {
+class Controller implements IController {
   async getUsers(): Promise<IUser[]> {
     return new Promise((resolve) => resolve(userList));
   }
