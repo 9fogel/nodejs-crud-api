@@ -9,7 +9,6 @@ class Controller {
 
   async getUserById(id: string): Promise<IUser | string> {
     return new Promise((resolve, reject) => {
-      //TODO: parse id from url in router??
       const user = userList.filter((user) => user.id === id)[0];
       if (user) {
         resolve(user);
@@ -33,7 +32,6 @@ class Controller {
 
   async updateUser(id: string, newData: IUser): Promise<IUser | string> {
     return new Promise((resolve, reject) => {
-      //TODO: parse id from url in router??
       const user = userList.filter((user) => user.id === id)[0];
       const indexOfUpdatedItem = userList.indexOf(user);
 
@@ -47,7 +45,6 @@ class Controller {
 
   async deleteUser(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      //TODO: parse id from url in router??
       const user = userList.filter((user) => user.id === id)[0];
       const indexOfItemToDelete = userList.indexOf(user);
       if (!user) {
@@ -55,7 +52,6 @@ class Controller {
       }
       userList.splice(indexOfItemToDelete, 1);
       resolve(`Deleted successfully`);
-      console.log(userList);
     });
   }
 }

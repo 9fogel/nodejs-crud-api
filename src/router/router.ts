@@ -3,17 +3,17 @@ import Controller from '../controller/controller.js';
 import { getBodyData } from '../utils/getBodyHelper.js';
 
 export const router = async (req: IncomingMessage, res: ServerResponse) => {
-  console.log('req.url', req.url);
+  // console.log('req.url', req.url);
 
   let urlParams = [];
   let userId;
   if (req.url) {
     urlParams = req.url.split('/');
-    console.log(urlParams);
+    // console.log(urlParams);
     if (urlParams.length > 3) {
       userId = urlParams[3].toString();
     }
-    console.log('userId', userId);
+    // console.log('userId', userId);
   }
 
   if (req.url === '/api/users' && req.method === 'GET') {
@@ -52,7 +52,7 @@ const getUserById = async (res: ServerResponse, id: string) => {
 
 const createUser = async (req: IncomingMessage, res: ServerResponse) => {
   const newUserBody = await getBodyData(req);
-  console.log(newUserBody);
+  // console.log(newUserBody);
   const newUser = await new Controller().createUser(JSON.parse(newUserBody));
   res.writeHead(201, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify(newUser));
@@ -77,42 +77,3 @@ const deleteUser = async (res: ServerResponse, id: string) => {
 //   "age": 30,
 //   "hobbies": "['jumping']"
 // }
-
-// console.log('work with server and ', req.url);
-
-//[GET] GET ALL
-// const allUsers = await new Controller().getUsers();
-// res.writeHead(200, { "Content-Type": "application/json" });
-// res.end(JSON.stringify(allUsers));
-
-//[GET] GET BY ID
-// const user = await new Controller().getUserById('1');
-// res.writeHead(200, { 'Content-Type': 'application/json' });
-// res.end(JSON.stringify(user));
-
-//[POST] CREATE
-// const user = {
-//   username: 'Kenga',
-//   age: 30,
-//   hobbies: ['jumping'],
-// }
-// // let newUserBody = await getBodyData(req);
-// // let newUser = await new Controller().createUser(JSON.parse(newUserBody));
-// const newUser = await new Controller().createUser(user);
-// res.writeHead(201, { 'Content-Type': 'application/json' });
-// res.end(JSON.stringify(newUser));
-
-//[PUT] UPDATE
-// const user = {
-//   username: 'Kenga',
-//   age: 30,
-//   hobbies: ['jumping'],
-// };
-// const updatedUser = await new Controller().updateUser('1', user);
-// res.writeHead(200, { 'Content-Type': 'application/json' });
-// res.end(JSON.stringify(updatedUser));
-
-//[DELETE] DELETE
-// const result = await new Controller().deleteUser('2');
-// res.writeHead(204, { 'Content-Type': 'application/json' });
-// res.end(JSON.stringify({ result }));
