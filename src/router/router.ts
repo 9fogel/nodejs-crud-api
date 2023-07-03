@@ -53,7 +53,7 @@ const getAllUsers = async (res: ServerResponse): Promise<void> => {
 
 const getUserById = async (res: ServerResponse, id: string): Promise<void> => {
   try {
-    const user = await new Controller().getUserById(id);
+    const user = await new Controller().getUserById(res, id);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(user));
   } catch {
@@ -78,7 +78,7 @@ const createUser = async (req: IncomingMessage, res: ServerResponse): Promise<vo
 const updateUser = async (req: IncomingMessage, res: ServerResponse, id: string): Promise<void> => {
   try {
     const newUserBody = await getBodyData(req);
-    const updatedUser = await new Controller().updateUser(id, JSON.parse(newUserBody));
+    const updatedUser = await new Controller().updateUser(res, id, JSON.parse(newUserBody));
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(updatedUser));
   } catch {
@@ -89,7 +89,7 @@ const updateUser = async (req: IncomingMessage, res: ServerResponse, id: string)
 
 const deleteUser = async (res: ServerResponse, id: string): Promise<void> => {
   try {
-    const result = await new Controller().deleteUser(id);
+    const result = await new Controller().deleteUser(res, id);
     res.writeHead(204, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ result }));
   } catch {

@@ -4,7 +4,7 @@ export const getBodyData = (req: IncomingMessage): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
       let bodyData = '';
-      req.on('data', (chunk: Buffer) => {
+      req.on('data', (chunk: Uint8Array) => {
         bodyData += chunk.toString();
       });
       req.on('end', () => {
