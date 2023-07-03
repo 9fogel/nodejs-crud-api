@@ -2,6 +2,8 @@ import { IncomingMessage, ServerResponse } from 'http';
 import Controller from '../controller/controller.js';
 import { getBodyData } from '../utils/getBodyHelper.js';
 
+const errorMessage = `Sorry, unpredicted error occured`;
+
 export const router = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
   // console.log('req.url', req.url);
 
@@ -39,34 +41,59 @@ export const router = async (req: IncomingMessage, res: ServerResponse): Promise
 };
 
 const getAllUsers = async (res: ServerResponse): Promise<void> => {
-  const allUsers = await new Controller().getUsers();
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(allUsers));
+  try {
+    const allUsers = await new Controller().getUsers();
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(allUsers));
+  } catch {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ errorMessage }));
+  }
 };
 
 const getUserById = async (res: ServerResponse, id: string): Promise<void> => {
-  const user = await new Controller().getUserById(id);
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(user));
+  try {
+    const user = await new Controller().getUserById(id);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(user));
+  } catch {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ errorMessage }));
+  }
 };
 
 const createUser = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
-  const newUserBody = await getBodyData(req);
-  // console.log(newUserBody);
-  const newUser = await new Controller().createUser(JSON.parse(newUserBody));
-  res.writeHead(201, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(newUser));
+  try {
+    const newUserBody = await getBodyData(req);
+    // console.log(newUserBody);
+    const newUser = await new Controller().createUser(JSON.parse(newUserBody));
+    res.writeHead(201, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(newUser));
+  } catch {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ errorMessage }));
+  }
 };
 
 const updateUser = async (req: IncomingMessage, res: ServerResponse, id: string): Promise<void> => {
-  const newUserBody = await getBodyData(req);
-  const updatedUser = await new Controller().updateUser(id, JSON.parse(newUserBody));
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(updatedUser));
+  try {
+    const newUserBody = await getBodyData(req);
+    const updatedUser = await new Controller().updateUser(id, JSON.parse(newUserBody));
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(updatedUser));
+  } catch {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ errorMessage }));
+  }
 };
 
 const deleteUser = async (res: ServerResponse, id: string): Promise<void> => {
-  const result = await new Controller().deleteUser(id);
-  res.writeHead(204, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ result }));
+  try {
+    const result = await new Controller().deleteUser(id);
+    res.writeHead(204, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ result }));
+  } catch {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ errorMessage }));
+  }
 };

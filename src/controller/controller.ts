@@ -45,10 +45,11 @@ class Controller implements IController {
   async deleteUser(id: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const user = userList.filter((user) => user.id === id)[0];
-      const indexOfItemToDelete = userList.indexOf(user);
+
       if (!user) {
         reject(`Sorry, user with id ${id} not found`);
       }
+      const indexOfItemToDelete = userList.indexOf(user);
       userList.splice(indexOfItemToDelete, 1);
       resolve(`Deleted successfully`);
     });
