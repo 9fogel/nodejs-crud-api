@@ -70,10 +70,3 @@ const deleteUser = async (res: ServerResponse, id: string): Promise<void> => {
   res.writeHead(204, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({ result }));
 };
-//_________________________________________
-//TODO: body example for testing
-// {
-//   "username": "Kenga",
-//   "age": 30,
-//   "hobbies": "['jumping']"
-// }

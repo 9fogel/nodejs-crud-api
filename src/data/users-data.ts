@@ -1,26 +1,27 @@
 import { IUser } from '../types/types.js';
+import { v4 as uuidv4 } from 'uuid';
 
 export const userList: Array<IUser> = [
   {
-    id: '1',
+    id: uuidv4(),
     username: 'Winnie the Pooh',
     age: 18,
     hobbies: ['eat honey', 'helping neighbors'],
   },
   {
-    id: '2',
+    id: uuidv4(),
     username: 'Christopher Robin',
     age: 10,
     hobbies: ['adventures'],
   },
   {
-    id: '3',
+    id: uuidv4(),
     username: 'Piglet',
     age: 15,
     hobbies: ['playing with Winnie', 'be a small animal'],
   },
   {
-    id: '4',
+    id: uuidv4(),
     username: 'Rabbit',
     age: 45,
     hobbies: ['gardening'],

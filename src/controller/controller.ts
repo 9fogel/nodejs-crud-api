@@ -1,5 +1,6 @@
 import { userList } from '../data/users-data.js';
 import { IUser, IController } from '../types/types.js';
+import { v4 as uuidv4 } from 'uuid';
 
 class Controller implements IController {
   async getUsers(): Promise<IUser[]> {
@@ -19,9 +20,8 @@ class Controller implements IController {
 
   async createUser(user: IUser): Promise<IUser> {
     return new Promise((resolve) => {
-      //TODO: generate uuid instead of random
       const newUser = {
-        id: Math.floor(4 + Math.random() * 10).toString(),
+        id: uuidv4(),
         ...user,
       };
       resolve(newUser);
