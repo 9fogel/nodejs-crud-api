@@ -24,6 +24,7 @@ npm run start:prod
 - To check the program functionality use [`Postman Agent`](https://www.postman.com/downloads/postman-agent/) or similar software.
 - Use _localhost:3000/api/users_ endpoint
 - To check .env subtask - please rename `.env-example` file to `.env`
+- Please note: to make the check more convenient, the database already has 4 default users at server start
 
 **The following operations are available:**
 
