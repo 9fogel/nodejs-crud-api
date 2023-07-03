@@ -64,7 +64,7 @@ const getUserById = async (res: ServerResponse, id: string): Promise<void> => {
 
 const createUser = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
   try {
-    const newUserBody = await getBodyData(req);
+    const newUserBody = await getBodyData(req, res);
     // console.log(newUserBody);
     const newUser = await new Controller().createUser(JSON.parse(newUserBody));
     res.writeHead(201, { 'Content-Type': 'application/json' });
@@ -77,7 +77,7 @@ const createUser = async (req: IncomingMessage, res: ServerResponse): Promise<vo
 
 const updateUser = async (req: IncomingMessage, res: ServerResponse, id: string): Promise<void> => {
   try {
-    const newUserBody = await getBodyData(req);
+    const newUserBody = await getBodyData(req, res);
     const updatedUser = await new Controller().updateUser(res, id, JSON.parse(newUserBody));
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(updatedUser));

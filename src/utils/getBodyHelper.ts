@@ -1,6 +1,7 @@
-import { IncomingMessage } from 'http';
+import { IncomingMessage, ServerResponse } from 'http';
+import { isBodyValid } from './validationHelpers.js';
 
-export const getBodyData = (req: IncomingMessage): Promise<string> => {
+export const getBodyData = (req: IncomingMessage, res: ServerResponse): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
       let bodyData = '';
@@ -8,7 +9,11 @@ export const getBodyData = (req: IncomingMessage): Promise<string> => {
         bodyData += chunk.toString();
       });
       req.on('end', () => {
-        resolve(bodyData);
+        if (isBodyValid(res, bodyData)) {
+          resolve(bodyData);
+        } else {
+          reject;
+        }
       });
     } catch (err) {
       if (err instanceof Error) {
