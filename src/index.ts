@@ -1,5 +1,6 @@
 import { IncomingMessage, Server, ServerResponse, createServer } from 'http';
 import { router } from './router/router.js';
+import 'dotenv/config';
 
 const PORT = process.env.PORT || 3000;
 

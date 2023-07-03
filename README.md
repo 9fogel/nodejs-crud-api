@@ -23,6 +23,7 @@ npm run start:prod
 ### Check
 - To check the program functionality use [`Postman Agent`](https://www.postman.com/downloads/postman-agent/) or similar software.
 - Use _localhost:3000/api/users_ endpoint
+- To check .env subtask - please rename `.env-example` file to `.env`
 
 **The following operations are available:**
 
