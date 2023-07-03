@@ -5,17 +5,13 @@ import { getBodyData } from '../utils/getBodyHelper.js';
 const errorMessage = `Sorry, unpredicted error occured`;
 
 export const router = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
-  // console.log('req.url', req.url);
-
   let urlParams = [];
   let userId;
   if (req.url) {
     urlParams = req.url.split('/');
-    // console.log(urlParams);
     if (urlParams.length > 3) {
       userId = urlParams[3].toString();
     }
-    // console.log('userId', userId);
   }
 
   if (req.url === '/api/users' && req.method === 'GET') {
@@ -65,7 +61,6 @@ const getUserById = async (res: ServerResponse, id: string): Promise<void> => {
 const createUser = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
   try {
     const newUserBody = await getBodyData(req, res);
-    // console.log(newUserBody);
     const newUser = await new Controller().createUser(JSON.parse(newUserBody));
     res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(newUser));
